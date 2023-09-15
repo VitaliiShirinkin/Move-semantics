@@ -1,5 +1,4 @@
-﻿// CMakeProject1.cpp: определяет точку входа для приложения.
-
+﻿
 #include <iostream>
 #include <string>
 
@@ -56,7 +55,6 @@ public:
 			res[j] = res[j] % 10 + '0';
 		}
 		res[0] += '0';
-
 		return big_integer(std::string(res));
 	}
 
@@ -92,13 +90,15 @@ public:
 			}
 			for (size_t i = 0; i < length; i++)
 				res[length - 1 - i] += '0';
-
 			return big_integer(std::string(res));
 		}
 	}
 
 	friend std::ostream& operator<<(std::ostream& stream, const big_integer& bigInt) {
 		return stream << bigInt.getValue();
+	}
+	~big_integer() {
+		std::cout << "Destructor\n";
 	}
 
 };
