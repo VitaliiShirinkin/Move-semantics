@@ -1,7 +1,7 @@
 ﻿
 #include <iostream>
 #include <string>
-#include <utility>
+//#include <utility>
 
 class big_integer {
 	std::string value;//значение числа
@@ -28,12 +28,13 @@ public:
 // проверяем "на цифру" каждый символ строки, кидаем исключение, если есть другие символы
 		for (size_t i = 0; i < this->value.length(); i++)
 			if (this->value[i] < '0' || this->value[i] > '9')
-				//throw std::exception("invalid character");
-				throw std::string("big_integer(const string &value) - string contain incorrect characters: ") + this->value;
+				throw std::exception("invalid character");
 	}
-
+	//конструктор перемещения
 	big_integer(big_integer&& other) noexcept
-		: value(std::exchange(other.value, nullptr)) {}
+	{
+		value = std::move(other.value);
+	}
 
 	big_integer& operator=(big_integer&& other) noexcept {
 		std::swap(value, other.value);
